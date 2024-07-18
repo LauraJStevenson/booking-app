@@ -1,0 +1,42 @@
+<ion-content [fullscreen]="true">
+<ion-header>
+  <ion-title style="margin-top: 40px;">Welcome Back</ion-title>
+</ion-header>
+  <div>
+    
+  </div>
+
+  <form>
+    <div class="login-content">
+      
+      <p>Please Sign In</p>
+      <ion-item>
+        <ion-input>
+          <ion-icon name="person-outline" slot="end"></ion-icon>
+        </ion-input>
+      </ion-item>
+      <br>
+      <br>
+      <ion-item>
+        <ion-input>
+          <ion-icon name="lock-closed-outline" slot="end"></ion-icon>
+        </ion-input>
+      </ion-item>
+      <br>
+      <br>
+      <div>
+        <a [routerLink]="['/reset-password']">Forgot Password?</a>
+      </div>
+      <div>
+        <p>New Here? <a [routerLink]="['/signup']">Sign Up Now!</a></p>
+      </div>
+      <ion-fab vertical="bottom" horizontal="center" style="margin-bottom: 40px;">
+        <ion-fab-button [routerLink]="['/home']">
+          <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+      
+    </div>
+  </form>
+</ion-content>
+
