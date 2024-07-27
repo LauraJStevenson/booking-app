@@ -1,45 +1,120 @@
 <ion-content [fullscreen]="true">
   <ion-header>
     <ion-title class="title">Welcome</ion-title>
-    <br>
-    <br>
     <p class="subTitle">Please Register to Create Your Account</p>
   </ion-header>
-  
-    <form>
-      <div>
-        <ion-item>
-          <ion-input placeholder="name" class="input">
-            <ion-icon name="person-outline" slot="end"></ion-icon>
-          </ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input placeholder="email" class="input">
-            <ion-icon name="mail-outline" slot="end"></ion-icon>
-          </ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input placeholder="password" class="input">
-            <ion-icon name="lock-closed-outline" slot="end"></ion-icon>
-          </ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input placeholder="confirm password" class="input">
-            <ion-icon name="lock-closed-outline" slot="end"></ion-icon>
-          </ion-input>
-        </ion-item>
-        <br>
-        <br>
-        <div class="signinLink">
-          <p>Already a Member? <a [routerLink]="['/login']" style="color: #FFC33F">Sign In Here</a></p>
-        </div>
-        <ion-fab vertical="bottom" horizontal="center" style="margin-bottom: 40px;">
-          <ion-fab-button [routerLink]="['/home']">
-            <ion-icon name="arrow-forward-circle-outline"></ion-icon>
-          </ion-fab-button>
-      </ion-fab>
-        
+
+  <form [formGroup]="regForm" (ngSubmit)="signUp()">
+    <div>
+      <ion-item>
+        <ion-input formControlName="fullName" placeholder="Name" class="input">
+          <ion-icon name="person-outline" slot="end"></ion-icon>
+        </ion-input>
+      </ion-item>
+      <div
+        class="validationMessage"
+        *ngIf="this.regForm.controls?.['fullName'].touched && this.regForm.controls?.['fullName'].invalid"
+      >
+        <ion-text color="danger" *ngIf="errorControl.fullName.errors?.required">
+          Name is required
+        </ion-text>
       </div>
-    </form>
-  </ion-content>
-  
+      <ion-item>
+        <ion-input formControlName="email" placeholder="Email" class="input">
+          <ion-icon name="mail-outline" slot="end"></ion-icon>
+        </ion-input>
+      </ion-item>
+      <div
+        class="validationMessage"
+        *ngIf="regForm.controls['email'].touched && regForm.controls['email'].invalid"
+      >
+        <ion-text
+          color="danger"
+          *ngIf="regForm.controls['email'].errors?.required"
+        >
+          Email is required
+        </ion-text>
+        <ion-text
+          color="danger"
+          *ngIf="regForm.controls['email'].errors?.pattern"
+        >
+          Please enter a valid email address
+        </ion-text>
+      </div>
+
+      <ion-item>
+        <ion-input
+          formControlName="password"
+          placeholder="Password"
+          type="password"
+          class="input"
+        >
+          <ion-icon name="lock-closed-outline" slot="end"></ion-icon>
+        </ion-input>
+      </ion-item>
+      <div
+        class="validationMessage"
+        *ngIf="regForm.controls['password'].touched && regForm.controls['password'].invalid"
+      >
+        <ion-text
+          color="danger"
+          *ngIf="regForm.controls['password'].errors?.required"
+        >
+          Password is required
+        </ion-text>
+        <ion-text
+          color="danger"
+          *ngIf="regForm.controls['password'].errors?.pattern"
+        >
+          Password must contain at least one uppercase letter, one lowercase
+          letter, one number, and be at least 8 characters long
+        </ion-text>
+      </div>
+
+      <ion-item>
+        <ion-input
+          formControlName="confirmPassword"
+          placeholder="Confirm Password"
+          type="password"
+          class="input"
+        >
+          <ion-icon name="lock-closed-outline" slot="end"></ion-icon>
+        </ion-input>
+      </ion-item>
+      <div
+        class="validationMessage"
+        *ngIf="regForm.controls['confirmPassword'].touched && regForm.controls['confirmPassword'].invalid"
+      >
+        <ion-text
+          color="danger"
+          *ngIf="regForm.controls['confirmPassword'].errors?.required"
+        >
+          Confirm Password is required
+        </ion-text>
+        <ion-text
+          color="danger"
+          *ngIf="regForm.controls['confirmPassword'].errors?.mustMatch"
+        >
+          Passwords must match
+        </ion-text>
+      </div>
+      <br />
+      <br />
+      <div class="signinLink">
+        <p>
+          Already a Member?
+          <a [routerLink]="['/login']" style="color: #ffc33f">Sign In Here</a>
+        </p>
+      </div>
+      <ion-fab
+        vertical="bottom"
+        horizontal="center"
+        style="margin-bottom: 40px"
+      >
+        <ion-fab-button (click)="signUp()">
+          <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </div>
+  </form>
+</ion-content>
